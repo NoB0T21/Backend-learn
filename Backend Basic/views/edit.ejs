@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device.width">
+        <link rel="stylesheet" href="/stylesheets/index.css">
+        <title>Notes</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div class="main w-full min-h-screen bg-zinc-900 p-10 text-white">
+            <a class="text-blue-500 inline-block mb-10" href="/">go back</a>
+            <div class="form p-10 text-white">
+                <form action="/edit" method="post">
+                    <input class="block w-1/3 px-5 py-3 bg-zinc-800 outline-none rounded-md" type="text" name="previous" value="<%= filename %>">
+                    <input class="block w-1/3 px-5 py-3 bg-zinc-800 outline-none rounded-md" type="text" name="new" placeholder="title goes here...">
+                    <input class="bg-yellow-800 mt-3 p-2 rounded-md" type="submit" value="create task">
+                </form>
+            </div>  
+        </div>
+        <script src="/javascript/index.js"></script>
+    </body>
+</html>
