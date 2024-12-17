@@ -35,7 +35,7 @@ app.post('/register', async (req,res) => {
                 email,
                 password: hash
             });
-            
+
             let token = jwt.sign({email: email, userid: user._id}, "shhhhh");
             res.cookie("token", token);
             res.send("registered");
@@ -50,10 +50,28 @@ app.post('/login', async (req,res) => {
     if(!user) return res.status(500).send("Something went wrong");
 
     bcrypt.compare(password, user.password, (err, result) => {
-        if(result) return res.status(200).send("you can login");
+        if(result){
+            let token = jwt.sign({email: email, userid: user._id}, "shhhhh");
+            res.cookie("token", token);
+            res.status(200).send("you can login");
+        }
         else res.redirect("/login");
     })
 })
+
+app.get('/logout', (req,res) => {
+    res.cookie("token" , "");
+    res.redirect('/login')
+});
+
+function isloggedIn(req, res, next){
+    if(req.cookie.token === "") res.send("you must be logged in");
+    else {
+        let data = jwt.verify(req.cookie.token, "shhhhh");
+        req.user = data;
+        next();
+    }
+}
 
 app.listen(3000, (req, res) => {
     console.log("listining on port 3000....")
