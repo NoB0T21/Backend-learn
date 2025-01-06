@@ -5,6 +5,7 @@ const path = require("path");
 const ownersRouter = require("./routes/ownersRouter");
 const usersRouter = require("./routes/usersRouter");
 const productsRouter = require("./routes/productsRouter");
+const indexRouter = require("./routes/index")
 const db = require("./config/mongoose-connection");
 
 app.use(express.json());
@@ -13,9 +14,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
-app.get("/owners", ownersRouter);
-app.get("/users", usersRouter);
-app.get("/products", productsRouter);
+app.use("/", indexRouter);
+app.use("/owners", ownersRouter);
+app.use("/users", usersRouter);
+app.use("/products", productsRouter);
 
 app.listen(3000, () => {
     console.log("listerning on port 3000....");
