@@ -1,0 +1,19 @@
+{
+  "name": "drive",
+  "version": "1.0.0",
+  "description": "Online storage webapp with server-side-rendering",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon server.js"
+  },
+  "author": "Aryan",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
+    "mongoose": "^8.9.3"
+  }
+}
