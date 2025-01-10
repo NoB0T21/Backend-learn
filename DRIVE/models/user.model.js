@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = mongoose.Schema({
     name: {
@@ -19,6 +20,11 @@ const userSchema = mongoose.Schema({
         minlength: [3, ' name must be atlest 3 characters long']
     }
 })
+
+userSchema.statics.hashPassword = async function(password) {
+     const pass = await bcrypt.hash(password, 10);
+     return pass
+}
 
 const user = mongoose.model('user', userSchema);
 
