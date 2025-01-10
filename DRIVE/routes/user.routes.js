@@ -12,4 +12,12 @@ router.post('/register',
     body('password').trim().isLength({min: 3}).withMessage('Must be 3 characters long'),
     userController.registerUser)
 
+router.get('/login',(req,res) => {
+    res.render("login");
+})
+router.post('/login',
+    body('name').isLength({min: 3}).withMessage('Must be 3 characters long'),
+    body('password').trim().isLength({min: 3}).withMessage('invalid password'),
+    userController.loginUser)
+
 module.exports = router;

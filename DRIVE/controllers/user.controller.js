@@ -12,6 +12,10 @@ module.exports.registerUser = async (req, res, next) => {
         }
 
         const {name, email, password} = req.body;
+        const existingUser = await userService.findUser({name});
+        if(existingUser){
+            return res.status(400).redirect('/user/login');
+        }
         const hashPassword = await userModel.hashPassword(password);
         const user = await userService.createUser({
             name,
@@ -19,5 +23,26 @@ module.exports.registerUser = async (req, res, next) => {
             password: hashPassword
         })
         res.json(user)
+}
+
+module.exports.loginUser = async (req, res, next) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({
+            errors: errors.array(),
+            message: "invalid data"
+        });
+    }
+    const {name, password} = req.body;
+    const user = await userService.findUser({name});
+    if(!user){
+        return res.status(400).json({message: "user or password is invalid"    
+        });
+    }
+    const isMatch = await user.comparePassword(password, user.password);
+    if(!isMatch){
+        return res.status(400).json({message: "user or password is invalid"});
+    }
+    res.json(user);
 }
 

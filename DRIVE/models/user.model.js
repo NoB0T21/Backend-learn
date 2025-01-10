@@ -21,6 +21,11 @@ const userSchema = mongoose.Schema({
     }
 })
 
+userSchema.methods.comparePassword = async function(password, hashpassword) {
+    const pass = await bcrypt.compare(password, hashpassword);
+    return pass
+}
+
 userSchema.statics.hashPassword = async function(password) {
      const pass = await bcrypt.hash(password, 10);
      return pass
