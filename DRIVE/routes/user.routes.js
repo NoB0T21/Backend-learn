@@ -20,4 +20,6 @@ router.post('/login',
     body('password').trim().isLength({min: 3}).withMessage('invalid password'),
     userController.loginUser)
 
+router.get('/logout',userController.logoutUser)
+
 module.exports = router;

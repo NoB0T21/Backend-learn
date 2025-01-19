@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device.width">
+        <title>DRIVE</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div class="main w-full text-white min-h-screen bg-zinc-900 text-white">
+            <div class="form p-10 text-white">
+                <h1 class="text-3xl">Upload file</h1>
+                <form class="form p-10 text-white" 
+                    action="/upload" 
+                    method="post" 
+                    enctype="multipart/form-data">
+                    <input class="bg-yellow-600 mt-3 p-2 rounded-md" type="file" name="file">
+                    <button class="bg-indigo-500 hover:bg-indigo-700 mt-3 mr-3 p-2 rounded-md flex " type="submit" value="Upload"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                        <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                      </svg><h3>Upload</h3></button>
+                  </form>
+            </div>
+        </div>
+    </body>
+</html>

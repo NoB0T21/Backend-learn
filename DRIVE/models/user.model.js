@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
 
 const userSchema = mongoose.Schema({
     name: {
@@ -20,6 +21,15 @@ const userSchema = mongoose.Schema({
         minlength: [3, ' name must be atlest 3 characters long']
     }
 })
+
+userSchema.methods.generateToken = function() {
+    const token = jwt.sign({
+        userId: user._id, 
+        email: user.email},
+    process.env.JWT_SECRET)
+    return token;
+}
+
 
 userSchema.methods.comparePassword = async function(password, hashpassword) {
     const pass = await bcrypt.compare(password, hashpassword);
