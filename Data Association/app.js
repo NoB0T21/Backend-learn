@@ -126,6 +126,7 @@ function isLoggedIn(req, res, next){
     else {
         let data = jwt.verify(req.cookies.token, "shhhhh");
         req.user = data;
+        console.log(data);
         next();
     }
 }

@@ -1,3 +1,4 @@
+const { json } = require("express");
 const userModel = require("../models/user.model");
 const userService = require('../services/user.service');
 const { validationResult} = require('express-validator');
@@ -43,10 +44,9 @@ module.exports.loginUser = async (req, res, next) => {
     if(!isMatch){
         return res.status(400).json({message: "user or password is invalid"});
     }
-
     const token = user.generateToken();
     res.cookie('token',token, {httpOnly: true});
-    res.json(user);
+    res.status(200).redirect("/home");
 }
 
 module.exports.logoutUser = async (req, res, next) => {
