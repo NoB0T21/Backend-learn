@@ -40,17 +40,17 @@ module.exports.loginUser = async (req, res, next) => {
         return res.status(400).json({message: "user or password is invalid"    
         });
     }
-    const isMatch = await user.comparePassword(password, user.password)
+    const isMatch = await user.comparePassword(password, user.password);
     if(!isMatch){
         return res.status(400).json({message: "user or password is invalid"});
     }
     const token = user.generateToken();
     res.cookie('token',token, {httpOnly: true});
     res.status(200).redirect("/home");
-}
+};
 
 module.exports.logoutUser = async (req, res, next) => {
     res.cookie('token', "", {httpOnly: true});
     res.redirect('/login');
-}
+};
 

@@ -14,7 +14,7 @@ const fileSchema = mongoose.Schema({
         ref: 'user',
         require: [true,'user is required'],
     }
-})
+});
 
 const file = mongoose.model('file', fileSchema);
 

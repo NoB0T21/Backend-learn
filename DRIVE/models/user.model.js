@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
         unique: true,
         minlength: [3, ' name must be atlest 3 characters long']
     }
-})
+});
 
 userSchema.methods.generateToken = function() {
     const token = jwt.sign({
@@ -28,18 +28,18 @@ userSchema.methods.generateToken = function() {
         email: this.email
     },process.env.JWT_SECRET);
     return token;
-}
+};
 
 
 userSchema.methods.comparePassword = async function(password, hashpassword) {
     const pass = await bcrypt.compare(password, hashpassword);
     return pass
-}
+};
 
 userSchema.statics.hashPassword = async function(password) {
      const pass = await bcrypt.hash(password, 10);
      return pass
-}
+};
 
 const user = mongoose.model('user', userSchema);
 

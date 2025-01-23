@@ -9,7 +9,7 @@ module.exports.createUser = async ({name, email, password}) =>{
         name,
         email,
         password
-    })
+    });
     return user;
 }
 

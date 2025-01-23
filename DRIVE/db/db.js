@@ -9,6 +9,6 @@ function connectToDB() {
         console.log(err);
         console.log('Failed To Connect DB');
     })
-}
+};
 
 module.exports = connectToDB;
