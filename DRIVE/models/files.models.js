@@ -13,6 +13,14 @@ const fileSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         require: [true,'user is required'],
+    },
+    ImageUrl:{
+        type: String,
+        require: [true,'user is required'],
+    },
+    fileType:{
+        type: String,
+        require: [true,'fileType is required'],
     }
 });
 

@@ -23,7 +23,7 @@ module.exports.registerUser = async (req, res, next) => {
             email,
             password: hashPassword
         })
-        res.json(user)
+        res.redirect('/login')
 }
 
 module.exports.loginUser = async (req, res, next) => {
