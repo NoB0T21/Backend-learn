@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device.width">
+        <link rel="stylesheet" href="../stylesheets/index.css">
+        <title>Profil</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div class="main w-full min-h-screen bg-zinc-900">
+            <div class="text-white">
+                <a class="group flex justify-start items-center text-blue-500 inline-block pt-10 px-10 hover:text-blue-600 transition-all duration-300 ease-in-out" href="/user/create">
+                    <svg class="w-[16px] h-[16px] group-hover:w-[20px] group-hover:h-[20px] transition-all duration-500 ease-in-out" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5"/>
+                      </svg>
+                    Go to Home</a>
+            </div>
+            <div class="form p-10 text-white">
+                <h1 class="text-3xl">All Users</h1>
+            <div class="users flex gap-3 flex-wrap">
+                <% if(users.length > 0){ %>
+                    <% users.reverse().forEach(function(user){ %>
+                        <div class="user w-72 p-4 bg-zinc-800 rounded-lg hover:p-3 hover:bg-zinc-700 transition-all duration-300 ease-in-out">
+                            <div class="h-52 w-full bg-transprant rounded-lg overflow-hidden">
+                                <img class="w-full h-full object-cover object-center" src="<%= user.image %>"> 
+                            </div>
+                            <h3 class="text-xl mt-3 tracking-tighter"><%= user.username %></h3>
+                            <h5 class="text-zinc-500"><%= user.email %></h5>
+                            <div class="flex justify-between mt-10">
+                                <a class="group1 text-zinc-200 flex flex-col items-center hover:text-yellow-400 transition-all duration-300 ease-in-out" href="user/edit/<%= user._id %>">
+                                    <svg class="w-[16px] h-[16px] group1-hover:w-[20px] group1-hover:h-[20px] transition-all duration-300 ease-in-out"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                      </svg>
+                                    Edit User</a>
+                                <a class="group2 text-red-200 flex flex-col items-center hover:text-red-400 transition-all duration-500 ease-in-out" href="user/delete/<%= user._id %>">
+                                    <svg class="w-[16px] h-[16px] group2-hover:w-[20px] group2-hover:h-[20px] transition-all duration-300 ease-in-out" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                        </svg>
+                                    Delete User</a>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else{ %>
+                    <h2 class="text-zinc-600">no User yet</h2>
+                <% } %>
+            </div>
+            </div>
+        </div>
+        <script src="../index.js"></script>
+    </body>
+</html>

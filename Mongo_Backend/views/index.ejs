@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device.width">
+        <link rel="stylesheet" href="../stylesheets/index.css">
+        <title>Profil</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <div class="main w-full min-h-screen bg-zinc-900">
+            <div class="text-white">
+                <a class="group flex justify-start items-center text-blue-500 inline-block pt-10 px-10 hover:text-blue-600 transition-all duration-300 ease-in-out" href="/read">
+                    <svg class="w-[16px] h-[16px] group-hover:w-[20px] group-hover:h-[20px] transition-all duration-500 ease-in-out" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5"/>
+                      </svg>
+                    Read Users</a>
+            </div>
+            <div class="form p-10 text-white">
+                <h1 class="text-3xl">Create User</h1>
+                <form class="flex gap-3" action="/user/create" method="post">
+                    <input class="block w-60 px-5 py-3 bg-zinc-800 outline-none rounded-md" type="text" name="username" placeholder="username">
+                    <input class="block w-60 px-5 py-3 bg-zinc-800 outline-none rounded-md" type="text" name="email" placeholder="Email">
+                    <input class="block w-75 px-5 py-3 bg-zinc-800 outline-none rounded-md" type="text" name="image" placeholder="image URL">
+                    <input class="bg-indigo-500 px-5 py-3 rounded-md hover:bg-indigo-600 hover:text-xl transition-all duration-300 ease-in-out" type="submit" value="create user">
+                </form>
+            </div>
+        </div>
+        <script src="../index.js"></script>
+    </body>
+</html>
