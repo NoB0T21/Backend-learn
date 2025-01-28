@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
     name:{
@@ -27,11 +28,29 @@ const userSchema = mongoose.Schema({
     age:{
         type: Number,
         require: true,
-    }
+    },
+    imageURI:{
+        type: String,
+        default: '/uploads/user.png'
+    },
 });
 
 userSchema.statics.hashPassword = async function (password){
     const pass = await bcrypt.hash(password,10);
+    return pass;
+}
+
+userSchema.methods.generateToken = function (){
+    const token = jwt.sign({
+        userID: this._id,
+        email: this.email,
+        username: this.username
+    }, process.env.SECRET_KEY);
+    return token;
+}
+
+userSchema.methods.comparePassword = async function(password, hashpassword) {
+    const pass = await bcrypt.compare(password, hashpassword)
     return pass;
 }
 
