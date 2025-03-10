@@ -4,6 +4,9 @@ const {body} = require('express-validator');
 
 const homeController = require('../controllers/home.controller')
 
+router.get('/start', (req, res) => {
+    res.render("home");
+});
 router.get('/home', homeController.showfile);
 
 router.post('/create',
