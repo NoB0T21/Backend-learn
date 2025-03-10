@@ -9,7 +9,11 @@
     <body>
         <div class="main w-full text-white min-h-screen bg-zinc-900 text-white">
             <div class="form p-10 text-white">
-                <h1 class="text-3xl">Upload file</h1>
+                <div class="w-full flex justify-between items-center">
+                    <h1 class="text-3xl">Upload file</h1>
+                    <a class="bg-red-500 hover:bg-red-700 mt-3 mr-3 p-2 rounded-md flex " href="/user/logout">
+                        <h3>Logout</h3></a>
+                </div>
                 <form class="form p-10 text-white" 
                     action="/upload" 
                     method="post" 
@@ -40,6 +44,8 @@
                                                 <img class="w-30 h-40" src="<%= file.ImageUrl %>" alt="<%= file.originalname %>">
                                             <% } else if (file.fileType === "text/plain" ) { %>
                                                 <img class="w-30 h-40" src="/images/file+txt+icon-1320183613100464335_512px.png" alt="<%= file.originalname %>">
+                                            <% } else if (file.fileType === "application/json" ) { %>
+                                                <img class="w-30 h-40" src="/images/json.png" alt="<%= file.originalname %>">
                                             <% } else { %>
                                                 <img class="w-30 h-40" src="/images/473dc604-c750-41f5-b394-1b9d1799ff06.svg" alt="<%= file.originalname %>">
                                             <% }%>

@@ -4,7 +4,8 @@ const userService = require('../services/user.service');
 const { validationResult} = require('express-validator');
 
 module.exports.registerUser = async (req, res, next) => {
-    const errors = validationResult(req);
+    try{
+        const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).json({
                 errors: errors.array(),
@@ -23,34 +24,46 @@ module.exports.registerUser = async (req, res, next) => {
             email,
             password: hashPassword
         })
-        res.redirect('/login')
+        res.redirect('/user/login')
+    }catch(err) {
+        res.status(503).json({
+            message: "Server error",
+            error: err.message 
+        });
+    }
 }
 
 module.exports.loginUser = async (req, res, next) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({
-            errors: errors.array(),
-            message: "invalid data"
+    try{ const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json({
+                errors: errors.array(),
+                message: "invalid data"
+            });
+        }
+        const {name, password} = req.body;
+        const user = await userService.findUser({name});
+        if(!user){
+            return res.status(400).json({message: "user or password is invalid"    
+            });
+        }
+        const isMatch = await user.comparePassword(password, user.password);
+        if(!isMatch){
+            return res.status(400).json({message: "user or password is invalid"});
+        }
+        const token = user.generateToken();
+        res.cookie('token',token, {httpOnly: true});
+        res.status(200).redirect("/home");
+    }catch(err) {
+        res.status(503).json({
+            message: "Server error",
+            error: err.message 
         });
     }
-    const {name, password} = req.body;
-    const user = await userService.findUser({name});
-    if(!user){
-        return res.status(400).json({message: "user or password is invalid"    
-        });
-    }
-    const isMatch = await user.comparePassword(password, user.password);
-    if(!isMatch){
-        return res.status(400).json({message: "user or password is invalid"});
-    }
-    const token = user.generateToken();
-    res.cookie('token',token, {httpOnly: true});
-    res.status(200).redirect("/home");
 };
 
 module.exports.logoutUser = async (req, res, next) => {
     res.cookie('token', "", {httpOnly: true});
-    res.redirect('/login');
+    res.redirect('/user/login');
 };
 
