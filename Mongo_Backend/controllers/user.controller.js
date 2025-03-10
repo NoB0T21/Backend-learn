@@ -20,9 +20,10 @@ module.exports.createUser = async (req, res) => {
 
         const user = await userServices.createUser({username, email, image});
         res.redirect('/read');
-    } catch{
-            res.status(503).json({
-            message: "Server error"
+    }catch(err) {
+        res.status(503).json({
+            message: "Server error",
+            error: err.message 
         });
     }
 }
@@ -31,10 +32,16 @@ module.exports.editUser = async (req, res) => {
     try{
         const userID = req.params.id;
         const user = await userServices.findUserbyID({userID});
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
         res.render('edit',{user: user});
-    }catch{
-            res.status(503).json({
-            message: "Server error"
+    }catch(err) {
+        res.status(503).json({
+            message: "Server error",
+            error: err.message 
         });
     }
 }
@@ -53,9 +60,10 @@ module.exports.updateUser = async (req, res) => {
         const {username, email, image} = req.body;
         const user = await userServices.updateUser({username, email, image, userID});
         res.redirect('/read');
-    }catch{
-            res.status(503).json({
-            message: "Server error"
+    }catch(err) {
+        res.status(503).json({
+            message: "Server error",
+            error: err.message 
         });
     }
 }
@@ -65,9 +73,10 @@ module.exports.deleteUser = async (req, res) => {
         const userID = req.params.id;
         const user = await userServices.deleteUser({userID});
         res.redirect('/read');
-    }catch{
-            res.status(503).json({
-            message: "Server error"
+    }catch(err) {
+        res.status(503).json({
+            message: "Server error",
+            error: err.message 
         });
     }
 }
