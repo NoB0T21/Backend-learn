@@ -4,7 +4,10 @@ const {body} = require('express-validator');
 
 const homeController = require('../controllers/home.controller')
 
-router.get('/', homeController.showfile);
+router.get('/', (req,res) => {
+    res.send("Hello Aryan")
+});
+router.get('/home', homeController.showfile);
 
 router.post('/create',
     body('filename').isLength({min: 3}).withMessage('Must be in 3 characters long'),
