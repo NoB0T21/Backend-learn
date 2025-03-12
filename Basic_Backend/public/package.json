@@ -1,0 +1,21 @@
+{
+  "name": "basic_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && node src",
+    "start": "npx nodemon server.js"
+  },
+  "author": "ARYAN",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
+    "firebase": "^11.4.0",
+    "mongoose": "^8.9.5"
+  }
+}
